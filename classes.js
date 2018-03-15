@@ -56,13 +56,11 @@ class Employee {
 
   Call your new class Manager
 */
-class Manager {
-  constructor(first_name, last_name, email, age, reports) {
-    (this.first_name = first_name),
-      (this.last_name = last_name),
-      (this.email = email),
-      (this.age = age),
-      (this.reports = []);
+class Manager extends Employee {
+  constructor(first_name, last_name, email, age) {
+    //code still runs even if you dont add the reports property in the conscructor??
+    super(first_name, last_name, email, age);
+    this.reports = [];
   }
   hire(employee) {
     this.reports.push(employee);
@@ -93,15 +91,10 @@ class Manager {
 
   Call your new class ProgressiveManager
 */
-class ProgressiveManager {
-  constructor(first_name, last_name, email, age, reports, title, bonus) {
-    (this.first_name = first_name),
-      (this.last_name = last_name),
-      (this.email = email),
-      (this.age = age),
-      (this.reports = []),
-      (this.title = "Not a manager"),
-      (this.bonus = 0);
+class ProgressiveManager extends Employee {
+  constructor(first_name, last_name, email, age, title, bonus) {
+    super(first_name, last_name, email, age);
+    (this.reports = []), (this.title = "Not a manager"), (this.bonus = 0);
   }
   hire(employee) {
     this.reports.push(employee);
@@ -113,8 +106,6 @@ class ProgressiveManager {
       this.title = "Manager";
     } else if (this.reports.length > 3) {
       this.title = "Mostly Manager";
-    } else if (this.reports.length > 0) {
-      this.title = "Barely Manager";
     } else {
       this.title = "Barely Manager";
     }
@@ -158,18 +149,16 @@ class Machine {
   }
   makeWidgets(number) {
     this.widgets_made_count += number;
-    if (this.widgets_made_count % 50 === 0) {
-      this.wear_and_tear_count += this.widgets_made_count / 50;
-    }
+    this.wear_and_tear_count += number / 50;
     return this.wear_and_tear_count;
   }
   fixMachine() {
-    return (this.need_reboot = true);
+    this.needs_reboot = true;
   }
-  reboot(cb) {
-    if (this.needs_reboot === true) {
-      wear_and_tear_count -= 10;
-      needs_reboot = false;
-    }
+  reboot() {
+    return () => {
+      this.wear_and_tear_count -= 10;
+      this.needs_reboot = false;
+    };
   }
 }
