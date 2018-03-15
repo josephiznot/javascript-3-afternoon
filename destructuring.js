@@ -86,9 +86,7 @@ function ingredients(obj) {
 
 //Code Here
 function largeNumbers({ first, second, third }) {
-  emptyArr = [];
-  emptyArr.push(first, second, third);
-  return Math.min(...emptyArr);
+  return Math.min(first, second, third);
 }
 ////////// PROBLEM 6 //////////
 
