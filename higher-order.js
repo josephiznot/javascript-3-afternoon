@@ -174,10 +174,14 @@ const purchases = [
 /*
   Use a high order method to create to get the sum of bobsTotal.
 */
-let bobArr = purchases.filter(function(element, index, array) {
-  return element.owner === "Bob";
-});
-let bobsTotal = bobArr.reduce(function(acc, curr, index, array) {
-  return (acc += curr.price);
+// let bobArr = purchases.filter(function(element, index, array) {
+//   return element.owner === "Bob";
+// });
+// let bobsTotal = bobArr.reduce(function(acc, curr, index, array) {
+//   return (acc += curr.price);
+// }, 0);
+// console.log(bobsTotal);
+let bobsTotal = purchases.reduce((acc, curr) => {
+  curr.owner === "Bob" ? curr.price : (curr.price = 0);
+  return acc + curr.price;
 }, 0);
-console.log(bobsTotal);
